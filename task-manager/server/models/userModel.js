@@ -151,5 +151,5 @@ const getuserbyid = async (userid )=>
 
 
 module.exports = {
-    getUserByEmail,CreateUser,getallusers,blockuserbyid,unblockuserbyid,deleteUserById
+    getUserByEmail,CreateUser,getallusers,blockuserbyid,unblockuserbyid,deleteUserById,getuserbyid
 };

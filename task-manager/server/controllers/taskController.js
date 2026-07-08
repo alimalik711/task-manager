@@ -34,7 +34,7 @@ try{
 
 
 }
-catch{
+catch(error){
  console.error(error.message);
         res.status(500).json({
             message : "Internal Server Error"
@@ -70,7 +70,7 @@ try{
 
 
 }
-catch{
+catch(error){
  console.error(error.message);
         res.status(500).json({
             message : "Internal Server Error"
@@ -172,9 +172,11 @@ try{
 
     const {id} = req.params
 
+    const userid = req.user.userid
+
     
 
-    const task = await taskModel.deleteTask(id)
+    const task = await taskModel.deleteTask(id,userid)
 
     
     if(!task)

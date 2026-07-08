@@ -173,8 +173,8 @@ const deleteUser = async (req,res)=>
     try{
 
         const {id} = req.params;
-
-        const user = await userModel.deleteuserbyid(id);
+        console.log(id)
+        const user = await userModel.deleteUserById(id);
 
         if(!user)
         {

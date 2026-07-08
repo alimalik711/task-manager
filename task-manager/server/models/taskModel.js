@@ -31,9 +31,9 @@ const getTasks = async(userid)=>
 {
 try{
 
-    const result = await pool.query("SELECT * FROM  tasks WHERE user_id =$1 RETURNING * ",[userid])
+    const result = await pool.query("SELECT * FROM  tasks WHERE user_id =$1 ",[userid])
 
-    return result.rows[0];
+    return result.rows;
 
 
 }
@@ -94,6 +94,9 @@ const deleteTask = async(taskId,userid)=>
 {
 try{
 
+    console.log(taskId)
+    console.log(userid)
+
     const result = await pool.query(" DELETE FROM  tasks WHERE id =$1 AND user_id =$2 RETURNING * ",[taskId,userid])
 
     return result.rows[0];
@@ -106,7 +109,7 @@ catch(error){
 
 }
 
-
+}
 
 const getalltasks = async()=>
 
@@ -140,7 +143,7 @@ catch(error){
 }
 
 
-}
+
 
 
 const deleteTaskadmin = async(taskId)=>
@@ -160,4 +163,4 @@ catch(error){
 
 }
 }
-module.exports = {createTask,getTasks,getoneTask,updateTask,deleteTask,getAlltasks,deleteTaskadmin}
+module.exports = {createTask,getTasks,getoneTask,updateTask,deleteTask,getalltasks,deleteTaskadmin}

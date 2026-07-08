@@ -8,7 +8,7 @@ function Dashboard(){
     const [description , setDescription] = useState("")
     const [editingTask, setEditingTask] = useState(null);
 
-     function getTasks() {
+    async function getTasks() {
     try {
 
         const response = await api.get("/tasks")
@@ -36,6 +36,7 @@ function Dashboard(){
     try {
 
         const response = await api.delete(`/tasks/${id}`)
+         console.log("GET response:", response.data);
 
         setTasks(
 
@@ -63,8 +64,13 @@ async function addTask(e) {
         const response = await api.post("/tasks",{
             title,description
         })
+        console.log(response.data);
 
-        setTasks(...tasks,[response.data.tasks])
+
+        console.log("GET response:", response.data);
+console.log("response.data.tasks:", response.data.tasks);
+console.log("is array:", Array.isArray(response.data.tasks));
+        setTasks(prev => [...prev, response.data.task]);
 
 
 
@@ -111,14 +117,13 @@ async function  updateTask(e) {
             title,description, is_completed: editingTask.is_completed
         })
 
-        setTasks((task)=>{
-            task.id === editingTask.id
-            ? response.data.task
-            :task
-
-
-
-        })
+        setTasks(prev =>
+            prev.map(task =>
+                task.id === editingTask.id
+                    ? response.data.task
+                    : task
+            )
+        );
 
         setEditingTask(null);
         setTitle("");
@@ -132,7 +137,8 @@ async function  updateTask(e) {
     
 }
 
-
+console.log(tasks);
+console.log(Array.isArray(tasks));
  return (
         <div>
 
@@ -153,14 +159,14 @@ async function  updateTask(e) {
 
 
 
-            {tasks.map((task) => 
-            (
+           {Array.isArray(tasks) &&
+  tasks.map(task => (
                 <div key={task.id}>
                     <h2>{task.title}</h2>
                     <p>{task.description}</p>
 
                     <button onClick={()=>deleteTasks(task.id)}>Delete</button>
-                    <button onClick={(task) => editTask(task)}>Edit</button>
+                    <button onClick={() => editTask(task)}>Edit</button>
                 </div>
             ))}
         </div>
