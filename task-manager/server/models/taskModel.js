@@ -1,6 +1,6 @@
 
 const pool = require('../config/db');
-const { getAlltasks } = require('../controllers/adminController');
+
 
 
 
@@ -130,7 +130,9 @@ try{
                                       `)
 
     return result.rows;
-
+    console.log("returned from model : ")
+    console.log(result.rows)
+    
 
 }
 catch(error){

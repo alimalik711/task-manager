@@ -62,6 +62,8 @@ const signup = async (req,res)=>{
 const login = async (req,res)=>{
 
     try{
+
+
             const { email , password} = req.body
 
             if( !email || !password)
@@ -71,6 +73,11 @@ const login = async (req,res)=>{
             }
 
             const user = await userModel.getUserByEmail(email);
+
+            if(user.is_blocked)
+            {
+                 return res.status(401).json({ message: "Blocked by admin" });
+            }
 
             if(!user)
             {

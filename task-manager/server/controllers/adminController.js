@@ -223,6 +223,9 @@ const getAlltasks = async (req,res)=>
 
 
         const tasks = await taskModel.getalltasks();
+        console.log("from controller")
+        console.log(tasks)
+        
 
         if(tasks.length==0)
         {

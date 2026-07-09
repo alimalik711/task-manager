@@ -9,7 +9,7 @@ function AllTasks() {
 
         try {
 
-            const response = await api.get("/tasks");
+            const response = await api.get("/admin/taskss");
 
             setTasks(response.data.tasks);
 
@@ -35,11 +35,11 @@ function AllTasks() {
 
     try{
 
-    const response = await api.delete(`/tasks/${id}`)
+    const response = await api.delete(`admin/tasks/${id}`)
 
     setTasks(
 
-      tasks.filter((user)=> {users.id != id})
+      tasks.filter((user)=> user.id != id)
       
     )
     }

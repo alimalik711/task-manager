@@ -22,6 +22,7 @@ function ProtectedRoute({ children,role }) {
     {
         return <Navigate to="/"/>
     }
+    
 
     return children
 

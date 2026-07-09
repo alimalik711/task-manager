@@ -37,7 +37,7 @@ const Users = () => {
       
     setUsers(
 
-      users.filter((user)=> users.id != id)
+      users.filter((user)=> user.id != id)
       
     )
     }
@@ -56,7 +56,7 @@ const Users = () => {
 
     try{
 
-    const response = await api.post(`admin/users/${id}/unblock`)
+    const response = await api.patch(`admin/users/${id}/unblock`)
 
     getUsers();
     }
@@ -73,7 +73,7 @@ const Users = () => {
 
     try{
 
-    const response = await api.post(`admin/users/${id}/block`)
+    const response = await api.patch(`admin/users/${id}/block`)
 
     getUsers();
     }
